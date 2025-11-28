@@ -1,0 +1,72 @@
+{
+  "name": "zero-lang-highlight",
+  "displayName": "Zero Language Highlight",
+  "description": "Syntax highlighting support for Zero language (.zero files)",
+  "version": "0.0.7",
+  "publisher": "BegoniaHe",
+  "icon": "icons/zero-logo.png",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.106.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "keywords": [
+    "zero",
+    "zerolang",
+    "syntax highlighting",
+    "language support"
+  ],
+  "main": "./out/extension.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BegoniaHe/Zero-Lang-Highlight-Vsix.git"
+  },
+  "contributes": {
+    "languages": [
+      {
+        "id": "zero",
+        "aliases": [
+          "Zero",
+          "zero"
+        ],
+        "extensions": [
+          ".zero"
+        ],
+        "icon": {
+          "light": "./icons/zero-file-light.svg",
+          "dark": "./icons/zero-file-dark.svg"
+        },
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "zero",
+        "scopeName": "source.zero",
+        "path": "./syntaxes/zero.tmLanguage.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "zero-lang-highlight.showInfo",
+        "title": "Zero: Show Extension Info"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "@types/vscode": "^1.106.1",
+    "@vscode/vsce": "^3.7.1",
+    "prettier": "^3.7.1",
+    "typescript": "^5.9.3"
+  }
+}

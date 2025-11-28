@@ -1,0 +1,377 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "zero",
+  "scopeName": "source.zero",
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#keywords" },
+    { "include": "#strings" },
+    { "include": "#numbers" },
+    { "include": "#operators" },
+    { "include": "#punctuation" },
+    { "include": "#function-definition" },
+    { "include": "#types" },
+    { "include": "#generics" },
+    { "include": "#function-call" },
+    { "include": "#variables" }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash.zero",
+          "match": "//.*$"
+        },
+        {
+          "name": "comment.block.documentation.zero",
+          "begin": "/\\*\\*",
+          "end": "\\*/",
+          "patterns": [
+            {
+              "name": "keyword.other.documentation.zero",
+              "match": "@\\w+"
+            },
+            {
+              "comment": "Markdown headings: # ## ### etc.",
+              "name": "markup.heading.zero",
+              "match": "^\\s*\\*\\s*(#{1,6})\\s+(.*)$",
+              "captures": {
+                "1": { "name": "punctuation.definition.heading.zero" },
+                "2": { "name": "entity.name.section.zero" }
+              }
+            },
+            {
+              "comment": "Markdown bold: **text**",
+              "name": "markup.bold.zero",
+              "match": "\\*\\*([^*]+)\\*\\*",
+              "captures": {
+                "1": { "name": "markup.bold.zero" }
+              }
+            },
+            {
+              "comment": "Markdown italic: _text_",
+              "name": "markup.italic.zero",
+              "match": "_([^_]+)_"
+            },
+            {
+              "comment": "Markdown strikethrough: ~text~",
+              "name": "markup.strikethrough.zero",
+              "match": "~([^~]+)~"
+            },
+            {
+              "comment": "Markdown highlight: ==text==",
+              "name": "markup.highlight.zero",
+              "match": "==([^=]+)=="
+            },
+            {
+              "comment": "Markdown inline code: `code`",
+              "name": "markup.inline.raw.zero",
+              "match": "`([^`]+)`"
+            },
+            {
+              "comment": "Markdown link: [text](url)",
+              "name": "markup.underline.link.zero",
+              "match": "\\[([^\\]]+)\\]\\(([^)]+)\\)",
+              "captures": {
+                "1": { "name": "string.other.link.title.zero" },
+                "2": { "name": "markup.underline.link.zero" }
+              }
+            },
+            {
+              "comment": "Markdown image: ![alt](url)",
+              "name": "markup.underline.link.image.zero",
+              "match": "!\\[([^\\]]+)\\]\\(([^)]+)\\)",
+              "captures": {
+                "1": { "name": "string.other.link.description.zero" },
+                "2": { "name": "markup.underline.link.zero" }
+              }
+            },
+            {
+              "comment": "Markdown unordered list: - item",
+              "name": "markup.list.unnumbered.zero",
+              "match": "^\\s*\\*\\s*-\\s+(.*)$",
+              "captures": {
+                "1": { "name": "markup.list.unnumbered.zero" }
+              }
+            },
+            {
+              "comment": "Markdown ordered list: 1. item",
+              "name": "markup.list.numbered.zero",
+              "match": "^\\s*\\*\\s*\\d+\\.\\s+(.*)$",
+              "captures": {
+                "1": { "name": "markup.list.numbered.zero" }
+              }
+            },
+            {
+              "comment": "Markdown blockquote: > text",
+              "name": "markup.quote.zero",
+              "match": "^\\s*\\*\\s*>\\s+(.*)$",
+              "captures": {
+                "1": { "name": "markup.quote.zero" }
+              }
+            },
+            {
+              "comment": "HTML comment in doc: <!-- comment -->",
+              "name": "comment.block.html.zero",
+              "begin": "<!--",
+              "end": "-->"
+            }
+          ]
+        },
+        {
+          "name": "comment.block.zero",
+          "begin": "/\\*",
+          "end": "\\*/"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.zero",
+          "match": "\\b(if|else|while|for|in|return|break|continue|match)\\b"
+        },
+        {
+          "name": "keyword.declaration.zero",
+          "match": "\\b(fn|let|var|struct|enum|type|impl|trait|import|macro)\\b"
+        },
+        {
+          "name": "keyword.other.alias.zero",
+          "match": "\\b(as)\\b"
+        },
+        {
+          "name": "constant.language.zero",
+          "match": "\\b(true|false|null)\\b"
+        },
+        {
+          "name": "variable.language.self.zero",
+          "match": "\\b(self)\\b"
+        },
+        {
+          "name": "variable.language.wildcard.zero",
+          "match": "\\b_\\b"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.raw.zero",
+          "begin": "r#*\"",
+          "end": "\"#*"
+        },
+        {
+          "name": "string.quoted.tex.zero",
+          "begin": "t\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.zero",
+              "match": "\\\\."
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.double.zero",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.zero",
+              "match": "\\\\."
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.single.zero",
+          "begin": "'",
+          "end": "'",
+          "patterns": [
+            {
+              "name": "constant.character.escape.zero",
+              "match": "\\\\."
+            }
+          ]
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "name": "constant.numeric.hex.zero",
+          "match": "\\b0[xX][0-9a-fA-F_]+\\b"
+        },
+        {
+          "name": "constant.numeric.binary.zero",
+          "match": "\\b0[bB][01_]+\\b"
+        },
+        {
+          "name": "constant.numeric.octal.zero",
+          "match": "\\b0[oO][0-7_]+\\b"
+        },
+        {
+          "name": "constant.numeric.decimal.zero",
+          "match": "\\b[0-9][0-9_]*\\.[0-9][0-9_]*([eE][+-]?[0-9_]+)?d\\b"
+        },
+        {
+          "name": "constant.numeric.decimal.zero",
+          "match": "\\b[0-9][0-9_]*d\\b"
+        },
+        {
+          "name": "constant.numeric.float.zero",
+          "match": "\\b[0-9][0-9_]*\\.[0-9][0-9_]*([eE][+-]?[0-9_]+)?\\b"
+        },
+        {
+          "name": "constant.numeric.float.zero",
+          "match": "\\b[0-9][0-9_]*[eE][+-]?[0-9_]+\\b"
+        },
+        {
+          "name": "constant.numeric.integer.zero",
+          "match": "\\b[0-9][0-9_]*\\b"
+        }
+      ]
+    },
+    "operators": {
+      "patterns": [
+        {
+          "name": "keyword.operator.range.zero",
+          "match": "\\.\\.=|\\.\\."
+        },
+        {
+          "name": "keyword.operator.path.zero",
+          "match": "::"
+        },
+        {
+          "name": "keyword.operator.arrow.zero",
+          "match": "(->|=>)"
+        },
+        {
+          "name": "keyword.operator.shift.zero",
+          "match": "(<<|>>)"
+        },
+        {
+          "name": "keyword.operator.comparison.zero",
+          "match": "(==|!=|<=|>=|<|>)"
+        },
+        {
+          "name": "keyword.operator.logical.zero",
+          "match": "(&&|\\|\\|)"
+        },
+        {
+          "name": "keyword.operator.assignment.zero",
+          "match": "(\\+=|-=|\\*=|/=|%=|&=|\\|=|\\^=|=)"
+        },
+        {
+          "name": "keyword.operator.arithmetic.zero",
+          "match": "(\\+|-|\\*|/|%)"
+        },
+        {
+          "name": "keyword.operator.bitwise.zero",
+          "match": "(~|&|\\||\\^)"
+        },
+        {
+          "name": "keyword.operator.logical.not.zero",
+          "match": "!"
+        },
+        {
+          "name": "keyword.operator.pattern.zero",
+          "match": "@"
+        },
+        {
+          "name": "keyword.operator.access.zero",
+          "match": "\\."
+        }
+      ]
+    },
+    "punctuation": {
+      "patterns": [
+        {
+          "name": "punctuation.separator.comma.zero",
+          "match": ","
+        },
+        {
+          "name": "punctuation.separator.colon.zero",
+          "match": ":"
+        },
+        {
+          "name": "punctuation.terminator.semicolon.zero",
+          "match": ";"
+        },
+        {
+          "name": "punctuation.bracket.round.zero",
+          "match": "[()]"
+        },
+        {
+          "name": "punctuation.bracket.square.zero",
+          "match": "[\\[\\]]"
+        },
+        {
+          "name": "punctuation.bracket.curly.zero",
+          "match": "[{}]"
+        }
+      ]
+    },
+    "types": {
+      "patterns": [
+        {
+          "name": "storage.type.primitive.zero",
+          "match": "\\b(i8|i16|i32|i64|u8|u16|u32|u64|f32|f64|dec64|cpx32|cpx64|bool|unit|string|Self|NullType)\\b"
+        },
+        {
+          "name": "entity.name.type.zero",
+          "match": "[A-Z][[:alnum:]_]*"
+        }
+      ]
+    },
+    "generics": {
+      "patterns": [
+        {
+          "name": "meta.generic.zero",
+          "begin": "<",
+          "end": ">",
+          "beginCaptures": {
+            "0": { "name": "punctuation.definition.generic.begin.zero" }
+          },
+          "endCaptures": {
+            "0": { "name": "punctuation.definition.generic.end.zero" }
+          },
+          "patterns": [
+            { "include": "#types" },
+            {
+              "name": "punctuation.separator.comma.zero",
+              "match": ","
+            }
+          ]
+        }
+      ]
+    },
+    "function-definition": {
+      "patterns": [
+        {
+          "name": "meta.function.definition.zero",
+          "match": "\\b(fn)\\s+([[:alpha:]_][[:alnum:]_]*)\\s*(?=\\(|<)",
+          "captures": {
+            "1": { "name": "keyword.declaration.zero" },
+            "2": { "name": "entity.name.function.definition.zero" }
+          }
+        }
+      ]
+    },
+    "function-call": {
+      "patterns": [
+        {
+          "name": "entity.name.function.call.zero",
+          "match": "([[:alpha:]_][[:alnum:]_]*)\\s*(?=\\()"
+        }
+      ]
+    },
+    "variables": {
+      "patterns": [
+        {
+          "name": "variable.other.zero",
+          "match": "[[:alpha:]_][[:alnum:]_]*"
+        }
+      ]
+    }
+  }
+}

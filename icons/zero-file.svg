@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 140" fill="none" role="img" aria-label="Zero Language Logo">
+  <!-- 定义样式：使用currentColor实现自适应颜色，stroke-linecap="round"使端点圆润 -->
+  <style>
+    .icon-path { 
+      stroke: currentColor; 
+      stroke-width: 12; 
+      stroke-linecap: round; 
+      stroke-linejoin: round; 
+      fill: none;
+    }
+    .icon-text { 
+      fill: currentColor; 
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+      font-weight: 600; 
+      font-size: 24px; 
+      text-anchor: middle; 
+      letter-spacing: 2px;
+    }
+  </style>
+
+  <path class="icon-path" d="M100 65 
+    C 125 65, 160 95, 160 65 
+    C 160 35, 125 65, 100 65 
+    C 75 65, 40 35, 40 65 
+    C 40 95, 75 65, 100 65 Z" />
+</svg>
