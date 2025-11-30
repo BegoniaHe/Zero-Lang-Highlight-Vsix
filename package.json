@@ -2,7 +2,7 @@
   "name": "zero-lang-highlight",
   "displayName": "Zero Language Highlight",
   "description": "Syntax highlighting support for Zero language (.zero files)",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "publisher": "BegoniaHe",
   "icon": "icons/zero-logo.png",
   "license": "MIT",
@@ -46,6 +46,12 @@
         "language": "zero",
         "scopeName": "source.zero",
         "path": "./syntaxes/zero.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "zero",
+        "path": "./snippets/zero.json"
       }
     ],
     "commands": [

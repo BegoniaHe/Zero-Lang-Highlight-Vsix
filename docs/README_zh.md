@@ -2,7 +2,7 @@
 
 [![VS Code Marketplace](https://img.shields.io/badge/VS%20Code-Marketplace-blue)](https://marketplace.visualstudio.com/items?itemName=BegoniaHe.zero-lang-highlight)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](../LICENSE)
-[![Version](https://img.shields.io/badge/version-0.0.7-blue.svg)](https://github.com/BegoniaHe/Zero-Lang-Highlight-Vsix)
+[![Version](https://img.shields.io/badge/version-0.0.8-blue.svg)](https://github.com/BegoniaHe/Zero-Lang-Highlight-Vsix)
 
 **Zero Language Highlight** 是一个为 Zero 编程语言（`.zero` 文件）提供语法高亮支持的 Visual Studio Code 扩展。
 

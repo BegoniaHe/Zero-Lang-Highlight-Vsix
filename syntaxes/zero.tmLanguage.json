@@ -156,39 +156,115 @@
     "strings": {
       "patterns": [
         {
+          "comment": "Raw string with hash delimiters",
           "name": "string.quoted.raw.zero",
-          "begin": "r#*\"",
-          "end": "\"#*"
+          "begin": "r(#*)\"",
+          "end": "\"\\1",
+          "beginCaptures": {
+            "0": { "name": "punctuation.definition.string.begin.zero" }
+          },
+          "endCaptures": {
+            "0": { "name": "punctuation.definition.string.end.zero" }
+          }
         },
         {
+          "comment": "TeX string",
           "name": "string.quoted.tex.zero",
           "begin": "t\"",
           "end": "\"",
+          "beginCaptures": {
+            "0": { "name": "punctuation.definition.string.begin.zero" }
+          },
+          "endCaptures": {
+            "0": { "name": "punctuation.definition.string.end.zero" }
+          },
           "patterns": [
             {
+              "comment": "Valid escape sequences",
               "name": "constant.character.escape.zero",
+              "match": "\\\\[nrtv0'\"\\\\]"
+            },
+            {
+              "comment": "Unicode escape",
+              "name": "constant.character.escape.unicode.zero",
+              "match": "\\\\u\\{[0-9a-fA-F]+\\}"
+            },
+            {
+              "comment": "Hex escape",
+              "name": "constant.character.escape.hex.zero",
+              "match": "\\\\x[0-9a-fA-F]{2}"
+            },
+            {
+              "comment": "Invalid escape sequence",
+              "name": "invalid.illegal.escape.zero",
               "match": "\\\\."
             }
           ]
         },
         {
+          "comment": "Double-quoted string",
           "name": "string.quoted.double.zero",
           "begin": "\"",
           "end": "\"",
+          "beginCaptures": {
+            "0": { "name": "punctuation.definition.string.begin.zero" }
+          },
+          "endCaptures": {
+            "0": { "name": "punctuation.definition.string.end.zero" }
+          },
           "patterns": [
             {
+              "comment": "Valid escape sequences",
               "name": "constant.character.escape.zero",
+              "match": "\\\\[nrtv0'\"\\\\]"
+            },
+            {
+              "comment": "Unicode escape",
+              "name": "constant.character.escape.unicode.zero",
+              "match": "\\\\u\\{[0-9a-fA-F]+\\}"
+            },
+            {
+              "comment": "Hex escape",
+              "name": "constant.character.escape.hex.zero",
+              "match": "\\\\x[0-9a-fA-F]{2}"
+            },
+            {
+              "comment": "Invalid escape sequence",
+              "name": "invalid.illegal.escape.zero",
               "match": "\\\\."
             }
           ]
         },
         {
+          "comment": "Character literal",
           "name": "string.quoted.single.zero",
           "begin": "'",
           "end": "'",
+          "beginCaptures": {
+            "0": { "name": "punctuation.definition.string.begin.zero" }
+          },
+          "endCaptures": {
+            "0": { "name": "punctuation.definition.string.end.zero" }
+          },
           "patterns": [
             {
+              "comment": "Valid escape sequences",
               "name": "constant.character.escape.zero",
+              "match": "\\\\[nrtv0'\"\\\\]"
+            },
+            {
+              "comment": "Unicode escape",
+              "name": "constant.character.escape.unicode.zero",
+              "match": "\\\\u\\{[0-9a-fA-F]+\\}"
+            },
+            {
+              "comment": "Hex escape",
+              "name": "constant.character.escape.hex.zero",
+              "match": "\\\\x[0-9a-fA-F]{2}"
+            },
+            {
+              "comment": "Invalid escape sequence",
+              "name": "invalid.illegal.escape.zero",
               "match": "\\\\."
             }
           ]
@@ -198,34 +274,67 @@
     "numbers": {
       "patterns": [
         {
+          "comment": "Hexadecimal with type suffix",
           "name": "constant.numeric.hex.zero",
-          "match": "\\b0[xX][0-9a-fA-F_]+\\b"
+          "match": "\\b0[xX][0-9a-fA-F_]+(i8|i16|i32|i64|u8|u16|u32|u64)?\\b"
         },
         {
+          "comment": "Binary with type suffix",
           "name": "constant.numeric.binary.zero",
-          "match": "\\b0[bB][01_]+\\b"
+          "match": "\\b0[bB][01_]+(i8|i16|i32|i64|u8|u16|u32|u64)?\\b"
         },
         {
+          "comment": "Octal with type suffix",
           "name": "constant.numeric.octal.zero",
-          "match": "\\b0[oO][0-7_]+\\b"
+          "match": "\\b0[oO][0-7_]+(i8|i16|i32|i64|u8|u16|u32|u64)?\\b"
         },
         {
+          "comment": "Floating point with dec64 suffix",
+          "name": "constant.numeric.float.zero",
+          "match": "\\b[0-9][0-9_]*\\.[0-9][0-9_]*([eE][+-]?[0-9_]+)?dec64\\b"
+        },
+        {
+          "comment": "Integer with dec64 suffix",
+          "name": "constant.numeric.float.zero",
+          "match": "\\b[0-9][0-9_]*dec64\\b"
+        },
+        {
+          "comment": "Floating point with d suffix (decimal)",
           "name": "constant.numeric.decimal.zero",
           "match": "\\b[0-9][0-9_]*\\.[0-9][0-9_]*([eE][+-]?[0-9_]+)?d\\b"
         },
         {
+          "comment": "Integer with d suffix (decimal)",
           "name": "constant.numeric.decimal.zero",
           "match": "\\b[0-9][0-9_]*d\\b"
         },
         {
+          "comment": "Floating point with f32/f64 suffix",
+          "name": "constant.numeric.float.zero",
+          "match": "\\b[0-9][0-9_]*\\.[0-9][0-9_]*([eE][+-]?[0-9_]+)?(f32|f64)\\b"
+        },
+        {
+          "comment": "Integer with f32/f64 suffix",
+          "name": "constant.numeric.float.zero",
+          "match": "\\b[0-9][0-9_]*(f32|f64)\\b"
+        },
+        {
+          "comment": "Floating point with exponent and optional suffix",
+          "name": "constant.numeric.float.zero",
+          "match": "\\b[0-9][0-9_]*[eE][+-]?[0-9_]+(f32|f64)?\\b"
+        },
+        {
+          "comment": "Floating point without suffix",
           "name": "constant.numeric.float.zero",
           "match": "\\b[0-9][0-9_]*\\.[0-9][0-9_]*([eE][+-]?[0-9_]+)?\\b"
         },
         {
-          "name": "constant.numeric.float.zero",
-          "match": "\\b[0-9][0-9_]*[eE][+-]?[0-9_]+\\b"
+          "comment": "Integer with type suffix (i8, i16, i32, i64, u8, u16, u32, u64)",
+          "name": "constant.numeric.integer.zero",
+          "match": "\\b[0-9][0-9_]*(i8|i16|i32|i64|u8|u16|u32|u64)\\b"
         },
         {
+          "comment": "Plain integer",
           "name": "constant.numeric.integer.zero",
           "match": "\\b[0-9][0-9_]*\\b"
         }
@@ -314,12 +423,19 @@
     "types": {
       "patterns": [
         {
+          "comment": "Primitive types - exact match",
           "name": "storage.type.primitive.zero",
           "match": "\\b(i8|i16|i32|i64|u8|u16|u32|u64|f32|f64|dec64|cpx32|cpx64|bool|unit|string|Self|NullType)\\b"
         },
         {
+          "comment": "Type parameters and generic bounds",
+          "name": "entity.name.type.parameter.zero",
+          "match": "\\b[A-Z]\\b(?=\\s*[,>:])"
+        },
+        {
+          "comment": "User-defined types (PascalCase)",
           "name": "entity.name.type.zero",
-          "match": "[A-Z][[:alnum:]_]*"
+          "match": "\\b[A-Z][a-zA-Z0-9_]*\\b"
         }
       ]
     },
